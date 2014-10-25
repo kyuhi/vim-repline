@@ -1,0 +1,48 @@
+*repline*           A tool to replace lines for vim.
+
+Autor : kyuhi <kyuhiapid74@gmail.com>
+License: MIT license (see LICENSE.txt)
+
+CONTENTS                                                     *repline-contents*
+
+Commands                                                     |repline-commands|
+Examples                                                     |repline-examples|
+
+===============================================================================
+Commands                                                     |repline-commands|
+
+:Repline {funcname} [{args}...]
+        Replace the lines using {funcname}. The function to replace the
+        line is {funcname} and its arguments are {args}. If you use it in
+        normal mode, the current lines will be replaced. If you use it in
+        vidual mode, the selected lines will be replaced. {funcname} of
+        function will be taken one or more arguments. The first argument is
+        the line to replace, rest arguments are strings to be given by the
+        caller.
+
+===============================================================================
+Examples                                                     |repline-examples|
+
+Example to remove the trailing spaces:
+>
+    " define function to remove the trailing spaces in string.
+    function! RStripLine( string )
+        return substitute( a:string, '\s\+$', '', '' )
+    endfunction
+
+    " then do the command
+    " :'<,'>Repline RStripLine
+<
+
+Example to append characters to trailing lines
+>
+    " define function to concatenate two strings.
+    function! ConcatStrings( string1, string2 )
+        return a:string1 . a:string2
+    endfunction
+
+    " then do the command
+    " :'<,'>Repline ConcatStrings ,
+<
+===============================================================================
+vim:ft=help
